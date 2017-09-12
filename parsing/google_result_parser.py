@@ -13,6 +13,7 @@ def parse_html(html):
         rank += 1
     return results
 
+
 def attributes(result_block):
     html = lh.tostring(result_block).decode('utf-8', errors='ignore')
     soup = BeautifulSoup(html, 'lxml')

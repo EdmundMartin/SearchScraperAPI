@@ -37,7 +37,7 @@ def unpack_data(data_dict):
     return keyword, geo, number, proxy
 
 
-async def gather_results(data):
+async def google_gather_results(data):
     result_dict = dict()
     try:
         keyword, geo, number, proxy = unpack_data(data)
