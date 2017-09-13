@@ -1,6 +1,6 @@
-from server.server import GoogleScraperServer
+from server.server import SearchScraper
 
 
 if __name__ == '__main__':
-    Google = GoogleScraperServer()
-    Google.run_server()
+    scraping = SearchScraper()
+    scraping.run_server()

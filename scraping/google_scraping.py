@@ -39,8 +39,8 @@ def unpack_data(data_dict):
 
 async def google_gather_results(data):
     result_dict = dict()
+    keyword, geo, number, proxy = unpack_data(data)
     try:
-        keyword, geo, number, proxy = unpack_data(data)
         google_url = build_google_url(geo, keyword, number)
         html_result = await google_request(google_url, proxy)
         results = parse_html(html_result['html'])
@@ -51,4 +51,4 @@ async def google_gather_results(data):
         return result_dict
     except Exception as err:
         await asyncio.sleep(0)
-        return {'error': str(err)}
+        return {'error': str(err), 'keyword': keyword, 'geo': geo, 'proxy': proxy}
