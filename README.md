@@ -96,6 +96,12 @@ res = requests.post('http://127.0.0.1:8080/bing-scrape', json={"keyword": "Pytho
 ```
 To scrape Google, a user sends a post-request to the "/bing-scrape" endpoint. The endpoint takes four arguments, keyword (string), geo (string), number (integer), and a proxy (string). The results are then returned should there be no error. 
 
+### Parameters
+* keyword - string, required
+* geo - string, optional will use Bing.com if no valid geo is provided.
+* number - integer, any integer from 1 to 50.
+* proxy - string
+
 ### Result
 ```json
 {
