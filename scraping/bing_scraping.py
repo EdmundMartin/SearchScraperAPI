@@ -28,7 +28,7 @@ def build_bing_url(geo, keyword, number):
 
 
 def unpack_data(data_dict):
-    keyword, geo, number = data_dict.get('keyword'), data_dict.get('geo'), data_dict.get('number', '100')
+    keyword, geo, number = data_dict.get('keyword'), data_dict.get('geo'), data_dict.get('number', 50)
     proxy = data_dict.get('proxy')
     if not keyword:
         raise NoKeywordProvided('No keyword was provided')
@@ -39,16 +39,15 @@ def unpack_data(data_dict):
 
 async def bing_gather_results(data):
     result_dict = dict()
+    keyword, geo, number, proxy = unpack_data(data)
     try:
-        keyword, geo, number, proxy = unpack_data(data)
         bing_url = build_bing_url(geo, keyword, number)
         html_result = await bing_request(bing_url, proxy)
         results = parse_html(html_result['html'])
         result_dict['results'] = results
         result_dict['keyword'] = keyword
         result_dict['geo'] = geo
-        result_dict['error'] = None
         return result_dict
     except Exception as err:
         await asyncio.sleep(0)
-        return {'error': str(err)}
+        return {'error': str(err), 'keyword': keyword, 'geo': geo, 'proxy': proxy}

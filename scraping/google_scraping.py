@@ -47,7 +47,6 @@ async def google_gather_results(data):
         result_dict['results'] = results
         result_dict['keyword'] = keyword
         result_dict['geo'] = geo
-        result_dict['error'] = None
         return result_dict
     except Exception as err:
         await asyncio.sleep(0)
