@@ -7,13 +7,14 @@ from common.headers import random_desktop_headers
 from common.google_urls import google_geos
 from parsing.google_result_parser import parse_html
 
+DEFAULT_GOOGLE_URL = 'https://www.google.com/search?q={}&num={}&hl=en'
 
 async def google_request(url, proxy):
     async with aiohttp.ClientSession() as client:
         try:
             async with client.get(url, headers=random_desktop_headers(), proxy=proxy, timeout=60) as response:
                 html = await response.text()
-                return {'html': html, 'status': response.status, 'error': None}
+                return {'html': html, 'status': response.status}
         except aiohttp.ClientError as err:
             return {'error': err}
 
@@ -21,10 +22,10 @@ async def google_request(url, proxy):
 def build_google_url(geo, keyword, number):
     keyword = keyword.replace(' ', '+')
     if geo:
-        url = google_geos.get(geo, 'https://www.google.com/search?q={}&num={}&hl=en')
+        url = google_geos.get(geo, DEFAULT_GOOGLE_URL)
         return url.format(keyword, number)
     else:
-        return 'https://www.google.com/search?q={}&num={}&hl=en'.format(keyword, number)
+        return DEFAULT_GOOGLE_URL.format(keyword, number)
 
 
 def unpack_data(data_dict):
@@ -43,6 +44,10 @@ async def google_gather_results(data):
     try:
         google_url = build_google_url(geo, keyword, number)
         html_result = await google_request(google_url, proxy)
+        if html_result.get('error'):
+            return {'keyword': keyword, 'geo': geo, 'proxy': proxy, 'error': 'Client error - likely connectivity issue'}
+        if html_result.get('status') > 499:
+            return {'keyword': keyword, 'geo': geo, 'proxy': proxy, 'error': 'Request rejected by Google'}
         results = parse_html(html_result['html'])
         result_dict['results'] = results
         result_dict['keyword'] = keyword

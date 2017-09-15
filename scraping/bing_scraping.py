@@ -7,6 +7,7 @@ from common.headers import random_desktop_headers
 from common.bing_urls import bing_geos
 from parsing.bing_result_parser import parse_html
 
+BING_DEFAULT_URL = 'http://www.bing.com/search?q={}&count={}'
 
 async def bing_request(url, proxy):
     async with aiohttp.ClientSession() as client:
@@ -21,10 +22,10 @@ async def bing_request(url, proxy):
 def build_bing_url(geo, keyword, number):
     keyword = keyword.replace(' ', '+')
     if geo:
-        url = bing_geos.get(geo, 'http://www.bing.com/search?q={}&count={}')
+        url = bing_geos.get(geo, BING_DEFAULT_URL)
         return url.format(keyword, number)
     else:
-        return 'http://www.bing.com/search?q={}&count={}'.format(keyword, number)
+        return BING_DEFAULT_URL.format(keyword, number)
 
 
 def unpack_data(data_dict):
