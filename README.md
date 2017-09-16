@@ -11,8 +11,8 @@ Coming soon.
 ```python
 import requests
 
-# Grabs a ten results from Google - for the term "Python Google Scraper" using geo "GB - aka Great Britain".
-res = requests.post('http://127.0.0.1:8080/google-scrape', json={"keyword": "Python Google scraper", "geo": "GB",
+# Grabs a ten results from Google - for the term "Python Google Scraper" using geo "uk - aka Great Britain".
+res = requests.post('http://127.0.0.1:8080/google-scrape', json={"keyword": "Python Google scraper", "geo": "uk",
                                                                  "number": 10, "proxy": "109.169.6.152:8080"})
 ```
 To scrape Google, a user sends a post-request to the "/google-scrape" endpoint. The endpoint takes four arguments, keyword (string), geo (string), number (integer), and a proxy (string). The results are then returned should there be no error. 
@@ -90,8 +90,8 @@ To scrape Google, a user sends a post-request to the "/google-scrape" endpoint. 
 ```python
 import requests
 
-# Grabs a ten results from Bing - for the term "Python Google Scraper" using geo "GB - aka Great Britain".
-res = requests.post('http://127.0.0.1:8080/bing-scrape', json={"keyword": "Python Google scraper", "geo": "GB",
+# Grabs a ten results from Bing - for the term "Python Google Scraper" using geo "uk - aka Great Britain".
+res = requests.post('http://127.0.0.1:8080/bing-scrape', json={"keyword": "Python Google scraper", "geo": "uk",
                                                                  "number": 10, "proxy": "109.169.6.152:8080"})
 ```
 To scrape Google, a user sends a post-request to the "/bing-scrape" endpoint. The endpoint takes four arguments, keyword (string), geo (string), number (integer), and a proxy (string). The results are then returned should there be no error. 
