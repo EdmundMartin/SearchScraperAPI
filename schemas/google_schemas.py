@@ -6,3 +6,4 @@ class GoogleSingleItem(Schema):
     geo = fields.String(required=False)
     proxy = fields.String(required=False)
     number = fields.Int(required=False)
+    lr = fields.Int(required=False)
