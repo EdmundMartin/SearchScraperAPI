@@ -2,9 +2,30 @@
 
 Search Scraper API is an implementation of an API, which allows you to scrape Google, Bing, with plans to add support for other search engines. The async server provides to endpoints where users can post keywords and other parameters. This scraper service is perfect those in SEO or for those looking to scrape a large number of results from popular search engines.
 
-## Starting the server
+## Examples
+```python
+from concurrent.futures import ThreadPoolExecutor
+import requests
 
-Coming soon.
+'''Assumes that an instance of the SearchScraperAPI is running on http://127.0.0.1:8080/
+    Implementing such a scraper will run a high risk of being banned should the user not rotate the
+    proxies used from a centralised pool.
+'''
+
+keywords = ['google scraping', 'google rank checker', 'scrape google']
+
+
+def post_to_server(keyword):
+    r = requests.post('http://127.0.0.1:8080/bing-scrape', json={'keyword': keyword})
+    return r.text
+
+with ThreadPoolExecutor(max_workers=3) as executor:
+    jobs = [executor.submit(post_to_server, keyword) for keyword in keywords]
+    results = [job.result() for job in jobs]
+    for result in results:
+        print(result)
+```
+The above example demonstrates requests being made to the server, dispatched using requests and the concurrent futures. When used as above the server should respond with results almost simultanousely. There is a significant chance of being block should you not use a pool of proxies, as the rapid firing of requests will set off bot detection. 
 
 ## Google Scraping
 
