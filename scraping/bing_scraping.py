@@ -31,8 +31,6 @@ def build_bing_url(geo, keyword, number):
 def unpack_data(data_dict):
     keyword, geo, number = data_dict.get('keyword'), data_dict.get('geo'), data_dict.get('number', 50)
     proxy = data_dict.get('proxy')
-    if not keyword:
-        raise NoKeywordProvided('No keyword was provided')
     if proxy:
         proxy = 'http://{}'.format(proxy)
     return keyword, geo, number, proxy

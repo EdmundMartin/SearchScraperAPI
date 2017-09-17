@@ -41,10 +41,7 @@ class TestGoogleParser(unittest.TestCase):
 class TestBingParser(unittest.TestCase):
 
     def setUp(self):
-        self.html = ''
-        with open(os.path.join(os.getcwd(),'html_samples/bing.html'), 'r', encoding='utf-8') as html_file:
-            for line in html_file:
-                self.html += line
+        self.html = open(os.path.join(os.getcwd(),'html_samples/bing.html'), 'r', encoding='utf-8').read()
 
     def test_bing_html(self):
         results = bing_parse_html(self.html)

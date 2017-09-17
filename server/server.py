@@ -12,6 +12,12 @@ class SearchScraper:
 
     def __init__(self):
 
+        try:
+            import uvloop
+            asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
+        except ImportError:
+            pass
+
         self.loop = asyncio.get_event_loop()
         self.google_schema = GoogleSingleItem()
 
