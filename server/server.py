@@ -51,9 +51,9 @@ class SearchScraper:
             return web.json_response(results, status=400)
         return web.json_response(results, status=200)
 
-    def run_server(self):
+    def run_server(self, host='127.0.0.1', port=8080):
         app = web.Application(loop=self.loop)
         app.router.add_post('/google-scrape', self.scrape_google_single_keyword)
         app.router.add_post('/bing-scrape', self.scrape_bing_single_keyword)
         app.router.add_post('/yandex-scrape', self.scrape_yandex_single_keyword)
-        web.run_app(app, host='127.0.0.1', port=8080)
+        web.run_app(app, host=host, port=port)
