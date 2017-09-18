@@ -192,3 +192,12 @@ To scrape Google, a user sends a post-request to the "/bing-scrape" endpoint. Th
     "keyword": "Python Google Scraping"
 }
 ```
+
+## Yandex
+The search scraper API, also supports Yandex. Yandex offers significantly less regions than both Google & Bing. Yandex also takes an additional optional parameter, with users being able to pass in an "lr" variable which customises the location from which the search is made. If no "lr" is used the search scraper server automatically uses the code for London. The list of all supported codes can be found in the documentation for the Yandex Search API.
+
+## Potential Uses
+* Keyword ranking, with a sufficient supply of proxies the server can be used to scrape data for a large number of keywords. This data is frequently used by digital marketing and SEO agencies to demonstrate organic performance.
+* Data aggregation.
+* Automated monitoring.
+* Trend discovery
