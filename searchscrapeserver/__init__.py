@@ -1,1 +1,1 @@
-from .server.server import ScrapeServer
+from .server.server import SearchScraper
