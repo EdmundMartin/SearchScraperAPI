@@ -1,1 +1,1 @@
-from server.server import SearchScraper
+from .server.server import SearchScraper

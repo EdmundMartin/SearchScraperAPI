@@ -1,3 +1,0 @@
-
-class NoKeywordProvided(Exception):
-    pass
