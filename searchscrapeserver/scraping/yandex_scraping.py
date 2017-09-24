@@ -2,10 +2,10 @@ import asyncio
 
 import aiohttp
 
-from common.exceptions import *
-from common.headers import random_desktop_headers
-from common.yandex_urls import yandex_geos
-from parsing.yandex_result_parser import parse_html
+from searchscrapeserver.common.exceptions import *
+from searchscrapeserver.common.headers import random_desktop_headers
+from searchscrapeserver.common.yandex_urls import yandex_geos
+from searchscrapeserver.parsing.yandex_result_parser import parse_html
 
 DEFAULT_YANDEX_URL = 'https://yandex.com/search/?text={}&lr={}&numdoc={}'
 

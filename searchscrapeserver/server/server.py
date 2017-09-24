@@ -2,10 +2,10 @@ import asyncio
 
 from aiohttp import web
 
-from scraping.google_scraping import google_gather_results
-from scraping.bing_scraping import bing_gather_results
-from scraping.yandex_scraping import yandex_gather_results
-from schemas.google_schemas import GoogleSingleItem
+from searchscrapeserver.scraping import google_scraping
+from searchscrapeserver.scraping import bing_scraping
+from searchscrapeserver.scraping import yandex_scraping
+from searchscrapeserver.schemas.google_schemas import GoogleSingleItem
 
 
 class SearchScraper:

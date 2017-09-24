@@ -2,10 +2,10 @@ import asyncio
 
 import aiohttp
 
-from common.exceptions import *
-from common.headers import random_desktop_headers
-from common.google_urls import google_geos
-from parsing.google_result_parser import parse_html
+from searchscrapeserver.common.exceptions import *
+from searchscrapeserver.common.headers import random_desktop_headers
+from searchscrapeserver.common.google_urls import google_geos
+from searchscrapeserver.parsing.google_result_parser import parse_html
 
 DEFAULT_GOOGLE_URL = 'https://www.google.com/search?q={}&num={}&hl=en'
 

@@ -2,10 +2,10 @@ import asyncio
 
 import aiohttp
 
-from common.exceptions import *
-from common.headers import random_desktop_headers
-from common.bing_urls import bing_geos
-from parsing.bing_result_parser import parse_html
+from searchscrapeserver.common.exceptions import *
+from searchscrapeserver.common.headers import random_desktop_headers
+from searchscrapeserver.common.bing_urls import bing_geos
+from searchscrapeserver.parsing.bing_result_parser import parse_html
 
 BING_DEFAULT_URL = 'http://www.bing.com/search?q={}&count={}'
 
