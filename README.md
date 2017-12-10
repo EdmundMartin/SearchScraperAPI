@@ -209,7 +209,7 @@ The search scraper API, also supports Yandex. Yandex offers significantly less r
 ### Parameters 
 * keyword - string, required
 * geo - string, optional will use Bing.com if no valid geo is provided.
-* number - integer, any integer from 1 to 50.
+* number - integer, any integer from 1 to 30.
 * proxy - string
 * lr - string.
 ### Results
