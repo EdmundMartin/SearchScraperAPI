@@ -11,14 +11,15 @@ from searchscrapeserver.schemas.google_schemas import GoogleSingleItem
 
 class SearchScraper:
 
-    def __init__(self):
+    def __init__(self, host, port):
 
         try:
             import uvloop
             asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
         except ImportError:
             pass
-
+        self.host = host
+        self.port = port
         self.loop = asyncio.get_event_loop()
         self.google_schema = GoogleSingleItem()
 
@@ -68,4 +69,4 @@ class SearchScraper:
         app.router.add_post('/bing-scrape', self.scrape_bing_single_keyword)
         app.router.add_post('/yandex-scrape', self.scrape_yandex_single_keyword)
         app.router.add_post('/duckduckgo-scrape', self.scrape_ddg_single_keyword)
-        web.run_app(app, host='127.0.0.1', port=8080)
+        web.run_app(app, host=self.host, port=self.port)
