@@ -206,6 +206,81 @@ To scrape Google, a user sends a post-request to the "/bing-scrape" endpoint. Th
 
 ## Yandex
 The search scraper API, also supports Yandex. Yandex offers significantly less regions than both Google & Bing. Yandex also takes an additional optional parameter, with users being able to pass in an "lr" variable which customises the location from which the search is made. If no "lr" is used the search scraper server automatically uses the code for London. The list of all supported codes can be found in the documentation for the Yandex Search API.
+### Parameters 
+* keyword - string, required
+* geo - string, optional will use Bing.com if no valid geo is provided.
+* number - integer, any integer from 1 to 50.
+* proxy - string
+* lr - string.
+### Results
+```json
+{
+    "results": [
+        {
+            "url": "https://github.com/NikolaiT/GoogleScraper",
+            "title": "1GitHub - NikolaiT/GoogleScraper: A Python module to scrape...",
+            "description": "A Python module to scrape several search engines (like Google, Yandex, Bing, Duckduckgo, Baidu and others) by using proxies (socks4/5, http proxy)...",
+            "rank": 1
+        },
+        {
+            "url": "https://www.dataquest.io/blog/web-scraping-tutorial-python/",
+            "title": "2Python Web Scraping Tutorial using BeautifulSoup",
+            "description": "Web scraping allows us to extract information from web pages. In this tutorial, you’ll learn how to perform web scraping with Python.",
+            "rank": 2
+        },
+        {
+            "url": "http://docs.python-guide.org/en/latest/scenarios/scrape/",
+            "title": "3HTML Scraping — The Hitchhiker's Guide to Python",
+            "description": "Web Scraping. lxml and Requests. Related Topics. ... Python 3, the new best practice, is here to stay. Python 2 will retire in only months!",
+            "rank": 3
+        },
+        {
+            "url": "http://www.trackers.clubpenguinaccess.com/vmiaw/lsoeiw.php?vm=bing-scraper-python",
+            "title": "4Bing scraper python",
+            "description": "Running. Python seach result scraper from: Google, Bing ... Supports google,bing,yandex and many more. Menu Web Scraping and Crawling Are Perfectly Legal, Right?day before yesterday",
+            "rank": 4
+        },
+        {
+            "url": "https://www.beyondtheboxscore.com/2015/9/24/9374949/a-new-python-based-pitchf-x-parser-scraper",
+            "title": "5A new Python-based PITCHf/x parser & scraper",
+            "description": "I've created something to fill that role: a Python-based PITCHf/x scraper that includes much (if not all) of the extra information.",
+            "rank": 5
+        },
+        {
+            "url": "https://medium.freecodecamp.org/how-to-scrape-websites-with-python-and-beautifulsoup-5946935d93fe",
+            "title": "6How to scrape websites with Python and BeautifulSoup",
+            "description": "We’ll make data extraction easier by building a web scraper to retrieve stock indices automatically from the Internet. ... We are going to use Python as our scraping language...",
+            "rank": 6
+        },
+        {
+            "url": "http://www.exclusivebeatsonly.com/ronyqw/cktsow.php?sw=google-url-scraper-python",
+            "title": "7Google url scraper python",
+            "description": "popular and powerful Python scraping our scraper a single URL to start from: http ... per page, you can A Python module to scrape several search engines (like Google, Yandex...",
+            "rank": 7
+        },
+        {
+            "url": "https://stackoverflow.com/questions/2081586/web-scraping-with-python",
+            "title": "8Web scraping with Python - Stack Overflow",
+            "description": "I'd like to grab daily sunrise/sunset times from a web site. Is it possible to scrape web content with Python? what are the modules used? Is there any tutorial available?",
+            "rank": 8
+        },
+        {
+            "url": "https://elitedatascience.com/python-web-scraping-libraries",
+            "title": "95 Tasty Python Web Scraping Libraries",
+            "description": "Web scraping is a common and effective way of collecting data for projects and for work. In this guide, we’ll be touring the essential stack of Python web scraping libraries.",
+            "rank": 9
+        },
+        {
+            "url": "https://www.safaribooksonline.com/library/view/web-scraping-with/9781491910283/ch01.html",
+            "title": "101. Your First Web Scraper - Web Scraping with Python [Book]",
+            "description": "Chapter 1. Your First Web Scraper Once you start web scraping, you start to ... The Web, without a layer of ... - Selection from Web Scraping with Python [Book].",
+            "rank": 10
+        }
+    ],
+    "keyword": "Python Yandex scraper",
+    "geo": "ru"
+}
+```
 
 ## Potential Uses
 * Keyword ranking, with a sufficient supply of proxies the server can be used to scrape data for a large number of keywords. This data is frequently used by digital marketing and SEO agencies to demonstrate organic performance.
