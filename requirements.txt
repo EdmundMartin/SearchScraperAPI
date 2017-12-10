@@ -1,0 +1,10 @@
+aiohttp==2.3.6
+async-timeout==2.0.0
+beautifulsoup4==4.6.0
+bs4==0.0.1
+chardet==3.0.4
+cssselect==1.0.1
+lxml==4.1.1
+marshmallow==2.15.0
+multidict==3.3.2
+yarl==0.16.0
