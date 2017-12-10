@@ -2,6 +2,17 @@
 
 Search Scraper API is an implementation of an API, which allows you to scrape Google, Bing, with plans to add support for other search engines. The async server provides to endpoints where users can post keywords and other parameters. This scraper service is perfect those in SEO or for those looking to scrape a large number of results from popular search engines.
 
+## Running The Server
+The easiet way to run the server is to use the included Dockerfile which will build the service and run itself on port 5000 by default.
+```
+docker build -t server:latest .
+```
+Simply build the server using the Dockerfile and then run the Docker image as follows:
+```
+docker run -d -p 5000:5000 server:latest
+```
+This will allow you to get the server up and running in a couple of minutes and you will then be able to start scraping some of the world's most popular search engines.
+
 ## Examples
 ```python
 from concurrent.futures import ThreadPoolExecutor
