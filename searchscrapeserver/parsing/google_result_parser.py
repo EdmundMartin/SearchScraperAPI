@@ -8,9 +8,10 @@ def parse_html(html):
     rank = 1
     for res in result_blocks[:-1]:
         result = attributes(res)
-        result.update({'rank': rank})
-        results.append(result)
-        rank += 1
+        if result:
+            result.update({'rank': rank})
+            results.append(result)
+            rank += 1
     return results
 
 
@@ -30,4 +31,7 @@ def attributes(result_block):
     if description:
         description = description.get_text()
 
+    if link.startswith('/') or link.startswith('#'):
+        return
+    
     return {'url': link, 'title': title, 'description': description}
