@@ -1,5 +1,6 @@
 from lxml import html as lh
 from bs4 import BeautifulSoup
+import re
 
 def parse_html(html):
     results = []
@@ -26,6 +27,7 @@ def attributes(result_block):
     title = soup.find('h2')
     if title:
         title = title.get_text()
+        title = re.sub('^\d+', '', title).lstrip(' ')
 
     description = soup.find('div', {'class': 'organic__content-wrapper'})
     if description:
