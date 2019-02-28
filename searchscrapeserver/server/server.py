@@ -1,4 +1,5 @@
 import asyncio
+from urllib.parse import urlparse
 
 from aiohttp import web
 
@@ -22,46 +23,35 @@ class SearchScraper:
         self.port = port
         self.loop = asyncio.get_event_loop()
         self.google_schema = GoogleSingleItem()
-
-    async def scrape_google_single_keyword(self, request):
+    
+    def parse_url(self, url: str):
+        funcs = {'google': google_gather_results, 'yandex': yandex_gather_results, 'bing': bing_gather_results, 
+                'duckduckgo': ddg_gather_results}
+        path = urlparse(url).path
+        return funcs[path.lstrip('/').split('-')[0]]
+    
+    async def do_standard_req(self, request: web.Request):
         data = await request.json()
         input_data, errors = self.google_schema.load(data)
         if errors:
             return web.json_response(errors, status=400)
-        results = await google_gather_results(input_data)
+        func = self.parse_url(str(request.url))
+        results = await func(input_data)
         if 'error' in results:
             return web.json_response(results, status=400)
         return web.json_response(results, status=200)
+
+    async def scrape_google_single_keyword(self, request: web.Request):
+        return await self.do_standard_req(request)
 
     async def scrape_bing_single_keyword(self, request):
-        data = await request.json()
-        input_data, errors = self.google_schema.load(data)
-        if errors:
-            return web.json_response(errors, status=400)
-        results = await bing_gather_results(input_data)
-        if 'error' in results:
-            return web.json_response(results, status=400)
-        return web.json_response(results, status=200)
+        return await self.do_standard_req(request)
 
     async def scrape_yandex_single_keyword(self, request):
-        data = await request.json()
-        input_data, errors = self.google_schema.load(data)
-        if errors:
-            return web.json_response(errors, status=400)
-        results = await yandex_gather_results(input_data)
-        if 'error' in results:
-            return web.json_response(results, status=400)
-        return web.json_response(results, status=200)
+        return await self.do_standard_req(request)
 
     async def scrape_ddg_single_keyword(self, request):
-        data = await request.json()
-        input_data, errors = self.google_schema.load(data)
-        if errors:
-            return web.json_response(errors, status=400)
-        results = await ddg_gather_results(input_data)
-        if 'error' in results:
-            return web.json_response(results, status=400)
-        return web.json_response(results, status=200)
+        return await self.do_standard_req(request)
 
     def run_server(self):
         app = web.Application(loop=self.loop)

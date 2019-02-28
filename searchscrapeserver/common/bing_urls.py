@@ -19,7 +19,7 @@ bing_geos = {
     'mx': 'http://www.bing.com/search?q={}&cc=MX&count={}',
     'my': 'http://www.bing.com/search?q={}&cc=MY&count={}',
     'kr': 'http://www.bing.com/search?q={}&cc=KR&count={}',
-    'j[': 'http://www.bing.com/search?q={}&cc=JP&count={}',
+    'jp': 'http://www.bing.com/search?q={}&cc=JP&count={}',
     'it': 'http://www.bing.com/search?q={}&cc=IT&count={}',
     'id': 'http://www.bing.com/search?q={}&cc=ID&count={}',
     'in': 'http://www.bing.com/search?q={}&cc=IN&count={}',

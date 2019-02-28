@@ -6,17 +6,10 @@ from searchscrapeserver.common.exceptions import *
 from searchscrapeserver.common.headers import random_desktop_headers
 from searchscrapeserver.common.yandex_urls import yandex_geos
 from searchscrapeserver.parsing.yandex_result_parser import parse_html
+from searchscrapeserver.scraping.requests import get_request
+
 
 DEFAULT_YANDEX_URL = 'https://yandex.com/search/?text={}&lr={}&numdoc={}'
-
-async def yandex_request(url, proxy):
-    async with aiohttp.ClientSession() as client:
-        try:
-            async with client.get(url, headers=random_desktop_headers(), proxy=proxy, timeout=60) as response:
-                html = await response.text()
-                return {'html': html, 'status': response.status}
-        except aiohttp.ClientError as err:
-            return {'error': err}
 
 
 def build_yandex_url(geo, keyword, number, lr):
@@ -44,11 +37,11 @@ async def yandex_gather_results(data):
     keyword, geo, number, lr, proxy = unpack_data(data)
     try:
         google_url = build_yandex_url(geo, keyword, number, lr)
-        html_result = await yandex_request(google_url, proxy)
+        html_result = await get_request(google_url, proxy)
         if html_result.get('error'):
             return {'keyword': keyword, 'geo': geo, 'proxy': proxy, 'error': 'Client error - likely connectivity issue'}
         if html_result.get('status') > 499:
-            return {'keyword': keyword, 'geo': geo, 'proxy': proxy, 'error': 'Request rejected by Google'}
+            return {'keyword': keyword, 'geo': geo, 'proxy': proxy, 'error': 'Request rejected by Yandex'}
         results = parse_html(html_result['html'])
         result_dict['results'] = results
         result_dict['keyword'] = keyword

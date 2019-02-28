@@ -1,6 +1,7 @@
 from lxml import html as lh
 from bs4 import BeautifulSoup
 
+
 def parse_html(html):
     results = []
     lxml_doc = lh.fromstring(html)
@@ -23,7 +24,7 @@ def attributes(result_block):
     if link:
         link = link['href']
 
-    title = soup.find('h3', {'class':'r'})
+    title = soup.find('h3')
     if title:
         title = title.get_text()
 

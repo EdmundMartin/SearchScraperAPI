@@ -2,21 +2,13 @@ import asyncio
 
 import aiohttp
 
-from searchscrapeserver.common.exceptions import *
 from searchscrapeserver.common.headers import random_desktop_headers
 from searchscrapeserver.common.bing_urls import bing_geos
 from searchscrapeserver.parsing.bing_result_parser import parse_html
+from searchscrapeserver.scraping.requests import get_request
+
 
 BING_DEFAULT_URL = 'http://www.bing.com/search?q={}&count={}'
-
-async def bing_request(url, proxy):
-    async with aiohttp.ClientSession() as client:
-        try:
-            async with client.get(url, headers=random_desktop_headers(), proxy=proxy, timeout=60) as response:
-                html = await response.text()
-                return {'html': html, 'status': response.status, 'error': None}
-        except aiohttp.ClientError as err:
-            return {'error': err}
 
 
 def build_bing_url(geo, keyword, number):
@@ -41,7 +33,7 @@ async def bing_gather_results(data):
     keyword, geo, number, proxy = unpack_data(data)
     try:
         bing_url = build_bing_url(geo, keyword, number)
-        html_result = await bing_request(bing_url, proxy)
+        html_result = await get_request(bing_url, proxy)
         results = parse_html(html_result['html'])
         result_dict['results'] = results
         result_dict['keyword'] = keyword
