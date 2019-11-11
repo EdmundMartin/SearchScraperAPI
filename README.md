@@ -126,7 +126,7 @@ import requests
 res = requests.post('http://127.0.0.1:8080/bing-scrape', json={"keyword": "Python Google scraper", "geo": "uk",
                                                                  "number": 10, "proxy": "109.169.6.152:8080"})
 ```
-To scrape Google, a user sends a post-request to the "/bing-scrape" endpoint. The endpoint takes four arguments, keyword (string), geo (string), number (integer), and a proxy (string). The results are then returned should there be no error. 
+To scrape Bing, a user sends a post-request to the "/bing-scrape" endpoint. The endpoint takes four arguments, keyword (string), geo (string), number (integer), and a proxy (string). The results are then returned should there be no error. 
 
 ### Parameters
 * keyword - string, required
