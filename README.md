@@ -2,6 +2,10 @@
 
 Search Scraper API is an implementation of an API, which allows you to scrape Google, Bing, Yandex, and DuckduckGo with plans to add support for other search engines. The async server provides to endpoints where users can post keywords and other parameters. This scraper service is perfect those in SEO or for those looking to scrape a large number of results from popular search engines.
 
+The repository has been recently updated to use [search_it](https://github.com/EdmundMartin/search_it) as underlying dependency, which allows for pagination.
+This has seen the payloads change slightly, and introduces a sleep parameter to avoid issues when paginating multiple 
+pages of results.
+
 ## Running The Server
 The easiet way to run the server is to use the included Dockerfile which will build the service and run itself on port 5000 by default.
 ```
@@ -38,22 +42,25 @@ with ThreadPoolExecutor(max_workers=3) as executor:
 ```
 The above example demonstrates requests being made to the server, dispatched using requests and the concurrent futures. When used as above the server should respond with results almost simultanousely. There is a significant chance of being block should you not use a pool of proxies, as the rapid firing of requests will set off bot detection. 
 
+## Parameters
+* keyword - string, required
+* domain - string, optional will use .com if no valid domain is provided.
+* number - integer, any integer.
+* language - string, optional will use en by default
+* proxy - string
+* sleep - passed into support pagination, time to sleep to wait between pagination
+
+
 ## Google Scraping
 
 ```python
 import requests
 
 # Grabs a ten results from Google - for the term "Python Google Scraper" using geo "uk - aka Great Britain".
-res = requests.post('http://127.0.0.1:8080/google-scrape', json={"keyword": "Python Google scraper", "geo": "uk",
+res = requests.post('http://127.0.0.1:8080/google-scrape', json={"keyword": "Python Google scraper", "domain": "ru",
                                                                  "number": 10, "proxy": "109.169.6.152:8080"})
 ```
 To scrape Google, a user sends a post-request to the "/google-scrape" endpoint. The endpoint takes four arguments, keyword (string), geo (string), number (integer), and a proxy (string). The results are then returned should there be no error. 
-
-### Parameters
-* keyword - string, required
-* geo - string, optional will use Google.com if no valid geo is provided.
-* number - integer, any integer from 1 to 100.
-* proxy - string
 
 ### Result
 ```json
@@ -123,16 +130,9 @@ To scrape Google, a user sends a post-request to the "/google-scrape" endpoint. 
 import requests
 
 # Grabs a ten results from Bing - for the term "Python Google Scraper" using geo "uk - aka Great Britain".
-res = requests.post('http://127.0.0.1:8080/bing-scrape', json={"keyword": "Python Google scraper", "geo": "uk",
+res = requests.post('http://127.0.0.1:8080/bing-scrape', json={"keyword": "Python Google scraper",
                                                                  "number": 10, "proxy": "109.169.6.152:8080"})
 ```
-To scrape Bing, a user sends a post-request to the "/bing-scrape" endpoint. The endpoint takes four arguments, keyword (string), geo (string), number (integer), and a proxy (string). The results are then returned should there be no error. 
-
-### Parameters
-* keyword - string, required
-* geo - string, optional will use Bing.com if no valid geo is provided.
-* number - integer, any integer from 1 to 50.
-* proxy - string
 
 ### Result
 ```json
@@ -206,12 +206,7 @@ To scrape Bing, a user sends a post-request to the "/bing-scrape" endpoint. The 
 
 ## Yandex
 The search scraper API, also supports Yandex. Yandex offers significantly less regions than both Google & Bing. Yandex also takes an additional optional parameter, with users being able to pass in an "lr" variable which customises the location from which the search is made. If no "lr" is used the search scraper server automatically uses the code for London. The list of all supported codes can be found in the documentation for the Yandex Search API.
-### Parameters 
-* keyword - string, required
-* geo - string, optional will use Bing.com if no valid geo is provided.
-* number - integer, any integer from 1 to 30.
-* proxy - string
-* lr - string.
+
 ### Results
 ```json
 {
