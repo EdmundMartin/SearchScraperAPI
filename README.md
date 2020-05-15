@@ -1,6 +1,6 @@
 # SearchScraperAPI
 
-Search Scraper API is an implementation of an API, which allows you to scrape Google, Bing, Yandex, and DuckduckGo with plans to add support for other search engines. The async server provides to endpoints where users can post keywords and other parameters. This scraper service is perfect those in SEO or for those looking to scrape a large number of results from popular search engines.
+Search Scraper API is an implementation of an API, which allows you to scrape Google, Bing, Yandex, and Qwant with plans to add support for other search engines. The async server provides to endpoints where users can post keywords and other parameters. This scraper service is perfect those in SEO or for those looking to scrape a large number of results from popular search engines.
 
 The repository has been recently updated to use [search_it](https://github.com/EdmundMartin/search_it) as underlying dependency, which allows for pagination.
 This has seen the payloads change slightly, and introduces a sleep parameter to avoid issues when paginating multiple 

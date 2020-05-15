@@ -60,7 +60,9 @@ class SearchScraper:
             results = await klass().scrape(request)
             results = self._results_to_json(results)
         except Exception as e:
-            print(e)
+            return web.json_response({
+                "errors": str(e)
+            }, status=500)
         else:
             return web.json_response(results, status=200)
 
