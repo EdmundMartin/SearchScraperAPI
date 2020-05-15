@@ -1,7 +1,8 @@
 FROM python:3-slim
 
-COPY requirements.txt .
-RUN pip install --upgrade && pip install -r requirements.txt
+COPY requirements.txt /tmp
+WORKDIR /tmp
+RUN pip install -r requirements.txt
 RUN apt-get update
 
 EXPOSE 5000
