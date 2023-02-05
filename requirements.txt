@@ -6,6 +6,6 @@ chardet==3.0.4
 idna==2.9
 marshmallow==3.6.0
 multidict==4.7.6
-searchit==2019.12.30.2
+searchit
 soupsieve==2.0
 yarl==1.4.2
