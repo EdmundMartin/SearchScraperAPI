@@ -5,7 +5,6 @@ beautifulsoup4==4.12.2
 chardet==3.0.4
 idna==2.9
 marshmallow==3.6.0
-multidict==4.7.6
 searchit
 soupsieve==2.0
 yarl==1.9.2
