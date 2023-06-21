@@ -70,7 +70,7 @@ class SearchScraper:
         return await self.do_standard_req(request)
 
     def run_server(self):
-        app = web.Application(loop=self.loop)
+        app = web.Application()
         app.router.add_post('/google-scrape', self.scrape_single_keyword)
         app.router.add_post('/bing-scrape', self.scrape_single_keyword)
         app.router.add_post('/yandex-scrape', self.scrape_single_keyword)
